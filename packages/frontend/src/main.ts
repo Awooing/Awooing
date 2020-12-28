@@ -21,5 +21,5 @@ if (process.env.NODE_ENV === 'development') {
   ;(window as any).$vue = app
 
   // eslint-disable-next-line no-console
-  console.log('Bound Vue instance to window.$app')
+  console.log('Bound Vue instance to window.$vue')
 }
