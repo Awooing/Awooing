@@ -1,0 +1,25 @@
+{
+  "name": "@awooing/awooing",
+  "version": "2.0.0",
+  "license": "PROPRIETARY",
+  "author": {
+    "name": "Project Awooing",
+    "email": "awoo@awooing.moe",
+    "url": "https://awooing.moe"
+  },
+  "contributors": [
+    {
+      "name": "Niputi",
+      "url": "https://github.com/Niputi_"
+    },
+    {
+      "name": "Vottus",
+      "url": "https://github.com/VottusCode"
+    }
+  ],
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend"
+  ],
+  "private": true
+}

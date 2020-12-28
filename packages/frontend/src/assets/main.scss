@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "bulma/sass/utilities/_all";
+@import "bulma/sass/grid/_all";
+
+html.dark {
+  --background-color: theme("colors.gray.800");
+  --text-color: theme("colors.gray.100");
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
