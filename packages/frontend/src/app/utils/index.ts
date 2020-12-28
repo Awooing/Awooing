@@ -1,18 +1,22 @@
-import { Ref } from "vue"
+import { Ref } from 'vue'
 
-export const promisedBoolRefTrue = (
-  promise: Promise<unknown>,
+export const promisedBoolRefTrue = <
+  TPromise extends Promise<unknown> = Promise<unknown>
+>(
+  promise: TPromise,
   ref: Ref<boolean>
-) => {
+): TPromise => {
   ref.value = false
   promise.then(() => (ref.value = true))
   return promise
 }
 
-export const promisedBoolRefFalse = (
-  promise: Promise<unknown>,
+export const promisedBoolRefFalse = <
+  TPromise extends Promise<unknown> = Promise<unknown>
+>(
+  promise: TPromise,
   ref: Ref<boolean>
-) => {
+): TPromise => {
   ref.value = true
   promise.then(() => (ref.value = false))
   return promise

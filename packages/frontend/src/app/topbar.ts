@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 // @ts-ignore
-import topbar from "topbar"
-import { TOPBAR_SETTINGS } from "./utils/constants"
+import topbar from 'topbar'
+import { TOPBAR_SETTINGS } from './utils/constants'
 
 export interface TopbarSettings {
   autoRun?: boolean
@@ -32,14 +32,14 @@ export class Topbar {
   /**
    * Show the topbar
    */
-  show() {
+  show(): void {
     return topbar.show()
   }
 
   /**
    * Hide the topbar
    */
-  hide() {
+  hide(): void {
     return topbar.hide()
   }
 

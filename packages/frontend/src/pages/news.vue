@@ -34,42 +34,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue"
-import PageTitle from "@/components/typography/PageTitle.vue"
-import Card from "@/components/elements/card/BlogCard.vue"
-import Paragraph from "@/components/typography/Paragraph.vue"
-import { onMountedSetTitle } from "@/app/hooks/title"
-import { hookArticles } from "@/app/hooks/api/articles"
-import Fetchable from "@/components/global/Fetchable.vue"
-import AwooingStopsCard from "@/components/elements/card/AwooingStopsCard.vue"
+import { defineComponent, reactive } from 'vue'
+import PageTitle from '@/components/typography/PageTitle.vue'
+import Card from '@/components/elements/card/BlogCard.vue'
+import Paragraph from '@/components/typography/Paragraph.vue'
+import { onMountedSetTitle } from '@/app/hooks/title'
+import { hookArticles } from '@/app/hooks/api/articles'
+import Fetchable from '@/components/global/Fetchable.vue'
+import AwooingStopsCard from '@/components/elements/card/AwooingStopsCard.vue'
 
 export default defineComponent({
-  name: "News",
+  name: 'News',
   components: {
     PageTitle,
     Card,
     Paragraph,
     Fetchable,
-    AwooingStopsCard
+    AwooingStopsCard,
   },
   setup() {
     const state = reactive({
       perPage: 5,
-      currentPage: 1
+      currentPage: 1,
     })
 
-    onMountedSetTitle("News")
+    onMountedSetTitle('News')
 
     const articles = hookArticles({
       perPage: state.perPage,
-      currentPage: state.currentPage
+      currentPage: state.currentPage,
     })
 
     return {
       state,
       articles,
-      truncate: (text: string) => text.substring(0, 120)
+      truncate: (text: string): string => text.substring(0, 120),
     }
-  }
+  },
 })
 </script>

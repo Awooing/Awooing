@@ -1,6 +1,8 @@
 import { hookFetch, req } from '@/app/axios'
 import { API_ENDPOINTS } from '@/app/utils/constants'
 import { CdnFile } from '@awooing/backend/src/fetchers/cdn.fetcher'
+import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.helper'
+import { AxiosResponse } from 'axios'
 
 /**
  * GET /awoo
@@ -13,7 +15,9 @@ export interface AwooData {
   awoo: CdnFile
 }
 
-export const fetchRandomImage = async () => {
+export const fetchRandomImage = async (): Promise<
+  false | AxiosResponse<SuccessResponse<AwooData>>
+> => {
   try {
     const res = await req<AwooData>({
       method: 'GET',
@@ -22,8 +26,6 @@ export const fetchRandomImage = async () => {
 
     return res
   } catch (e) {
-    console.error('ERROR AWOOO')
-    console.log({ e })
     return false
   }
 }

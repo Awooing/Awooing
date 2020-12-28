@@ -1,2 +1,2 @@
 #!/bin/sh
-yarn workspace @awooing/backend/src "$@"
+yarn workspace @awooing/backend "$@"

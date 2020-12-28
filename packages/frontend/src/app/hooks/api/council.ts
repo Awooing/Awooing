@@ -1,6 +1,8 @@
 import { hookFetch, req } from '@/app/axios'
 import { API_ENDPOINTS } from '@/app/utils/constants'
 import { CouncilMemberDto } from '@awooing/backend/src/dto/db/CouncilMemberDto'
+import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.helper'
+import { AxiosResponse } from 'axios'
 
 /**
  * GET /council
@@ -13,7 +15,9 @@ export interface CouncilData {
   members: CouncilMemberDto
 }
 
-export const fetchCouncil = async () => {
+export const fetchCouncil = async (): Promise<
+  false | AxiosResponse<SuccessResponse<CouncilData>>
+> => {
   try {
     const res = await req<CouncilData>({
       method: 'GET',
@@ -22,7 +26,6 @@ export const fetchCouncil = async () => {
 
     return res
   } catch (e) {
-    console.log({ e })
     return false
   }
 }

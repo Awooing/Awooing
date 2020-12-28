@@ -31,12 +31,14 @@ export const retrieve = <T = unknown>(
  *
  * @param name Item Name
  */
-export const exists = (name: string) => retrieve(name) !== null
+export const exists = (name: string): boolean => retrieve(name) !== null
 
 /**
  * Alias of exists()
  */
-export const has = (...args: Parameters<typeof exists>) => exists(...args)
+export const has = (
+  ...args: Parameters<typeof exists>
+): ReturnType<typeof exists> => exists(...args)
 
 /**
  * Create/Update LocalStorage item
@@ -57,9 +59,14 @@ export const set = <T = unknown>(name: string, value: T): T => {
  *
  * @param {string} name Item Name
  */
-export const remove = (name: string) => localStorage.removeItem(prefix(name))
+export const remove = (
+  name: string
+): ReturnType<typeof localStorage.removeItem> =>
+  localStorage.removeItem(prefix(name))
 
 /**
  * Alias of remove()
  */
-export const del = (...args: Parameters<typeof remove>) => remove(...args)
+export const del = (
+  ...args: Parameters<typeof remove>
+): ReturnType<typeof remove> => remove(...args)

@@ -1,5 +1,5 @@
-import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { reactive } from 'vue'
+import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { reactive, UnwrapRef } from 'vue'
 import {
   SuccessResponse,
   ErrorDescription,
@@ -17,15 +17,15 @@ import { frmt } from '@awooing/backend/src/console'
  * Function that initializes the Axios library
  * and sets all the important settings.
  */
-export const createAxios = () => {
-  const axios = Axios
-  axios.defaults.baseURL =
-    process.env.NODE_ENV === 'production'
-      ? window.location.hostname.includes('staging')
-        ? STAGING_API_ENDPOINT
-        : PROD_API_ENDPOINT
-      : DEV_API_ENDPOINT
-
+export const createAxios = (): AxiosInstance => {
+  const axios = Axios.create({
+    baseURL:
+      process.env.NODE_ENV === 'production'
+        ? window.location.hostname.includes('staging')
+          ? STAGING_API_ENDPOINT
+          : PROD_API_ENDPOINT
+        : DEV_API_ENDPOINT
+  })
   return axios
 }
 
@@ -70,13 +70,12 @@ export const request = async <
   E extends ErrorDescription = ErrorDescription
 >(
   config: AxiosRequestConfig
-) => {
+): Promise<AxiosResponse<SuccessResponse<R>>> => {
   const request = await instance.request<SuccessResponse<R> | ErrorResponse<E>>(
     config
   )
 
   if (!request.data.success) {
-    console.log(request.data)
     throw new BackendFetchError(request.data.error, request)
   }
   return request as AxiosResponse<SuccessResponse<R>>
@@ -133,7 +132,11 @@ export const reactiveFetch = <
 export const hookFetch = <TData extends unknown>(
   fetchFn: () => Promise<false | AxiosResponse<SuccessResponse<TData>>>,
   auto = true
-) => {
+): {
+  data: UnwrapRef<TData> | null
+  request: () => Promise<unknown>
+  fetch: FetchableState
+} => {
   const data = reactiveFetch({
     data: null as TData | null,
     request: (async () => null) as () => Promise<unknown>
@@ -144,6 +147,7 @@ export const hookFetch = <TData extends unknown>(
     const res = await bar.promised(fetchFn())
 
     if (process.env.NODE_ENV === 'development')
+      // eslint-disable-next-line no-console
       console.log(frmt('Response: '), res)
 
     if (!res) return (data.fetch = false)

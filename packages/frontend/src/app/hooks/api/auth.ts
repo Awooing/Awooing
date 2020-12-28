@@ -3,6 +3,8 @@ import UserDto from '@awooing/backend/src/dto/db/UserDto'
 import * as AS from '@awooing/backend/src/http/schemas/auth.schema'
 import { JwtPayload } from '@awooing/backend/src/http/helpers/jwt.helper'
 import { API_ENDPOINTS } from '@/app/utils/constants'
+import { AxiosResponse } from 'axios'
+import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.helper'
 
 /**
  * POST /auth/login (AS.Login)
@@ -19,7 +21,9 @@ export interface LoginSuccessData {
 export const authenticate = async ({
   username,
   password
-}: AS.Login['Body']) => {
+}: AS.Login['Body']): Promise<
+  false | AxiosResponse<SuccessResponse<LoginSuccessData>>
+> => {
   try {
     const res = await req<LoginSuccessData>({
       method: 'POST',
@@ -32,7 +36,6 @@ export const authenticate = async ({
 
     return res
   } catch (e) {
-    console.log({ e })
     return false
   }
 }
@@ -51,7 +54,9 @@ export const register = async ({
   username,
   password,
   repeat
-}: AS.Register['Body']) => {
+}: AS.Register['Body']): Promise<
+  false | AxiosResponse<SuccessResponse<LoginSuccessData>>
+> => {
   try {
     const res = await req<LoginSuccessData>({
       method: 'PUT',
@@ -65,7 +70,6 @@ export const register = async ({
 
     return res
   } catch (e) {
-    console.log({ e })
     return false
   }
 }

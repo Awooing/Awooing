@@ -54,15 +54,15 @@ export default defineComponent({
 
     const awoo = hookRandomImage()
 
-    const makeCdnUrl = (path: string) =>
+    const makeCdnUrl = (path: string): string =>
       path.startsWith('http') ? path : `https://cdn.awooing.moe/${path}`
 
-    const loadImage = async () => {
+    const loadImage = async (): Promise<void> => {
       if (awoo.data) state.previousAwoo.push(awoo.data.awoo)
       await awoo.request()
     }
 
-    const setPreviousAwoo = () => {
+    const setPreviousAwoo = async (): Promise<void> => {
       if (state.previousAwoo.length < 1) return
 
       const previous = state.previousAwoo[state.previousAwoo.length - 1]
@@ -72,7 +72,7 @@ export default defineComponent({
       awoo.data = { awoo: previous }
     }
 
-    const copyImageLink = () => {
+    const copyImageLink = async (): Promise<void> => {
       if (!awoo.data) return
       return navigator.clipboard.writeText(makeCdnUrl(awoo.data.awoo.path))
     }

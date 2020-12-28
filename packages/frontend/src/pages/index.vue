@@ -54,19 +54,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
-import PageTitle from "@/components/typography/PageTitle.vue"
-import Card from "@/components/elements/card/BlogCard.vue"
-import AwooingStopsCard from "@/components/elements/card/AwooingStopsCard.vue"
-import DiscordWidget from "@/components/global/DiscordWidget.vue"
-import Button from "@/components/elements/button/Button.vue"
-import Paragraph from "@/components/typography/Paragraph.vue"
-import Fetchable from "@/components/global/Fetchable.vue"
-import { onMountedSetTitle } from "@/app/hooks/title"
-import { hookArticles } from "@/app/hooks/api/articles"
+import { defineComponent } from 'vue'
+import PageTitle from '@/components/typography/PageTitle.vue'
+import Card from '@/components/elements/card/BlogCard.vue'
+import AwooingStopsCard from '@/components/elements/card/AwooingStopsCard.vue'
+import DiscordWidget from '@/components/global/DiscordWidget.vue'
+import Button from '@/components/elements/button/Button.vue'
+import Paragraph from '@/components/typography/Paragraph.vue'
+import Fetchable from '@/components/global/Fetchable.vue'
+import { onMountedSetTitle } from '@/app/hooks/title'
+import { hookArticles } from '@/app/hooks/api/articles'
 
 export default defineComponent({
-  name: "Index",
+  name: 'Index',
   components: {
     PageTitle,
     Card,
@@ -74,20 +74,20 @@ export default defineComponent({
     Button,
     Paragraph,
     AwooingStopsCard,
-    Fetchable
+    Fetchable,
   },
   setup() {
-    onMountedSetTitle("The Awooing Place")
+    onMountedSetTitle('The Awooing Place')
 
     const articles = hookArticles({
       perPage: 2,
-      currentPage: 1
+      currentPage: 1,
     })
 
     return {
       articles,
-      truncate: (text: string) => text.substring(0, 120)
+      truncate: (text: string): string => text.substring(0, 120),
     }
-  }
+  },
 })
 </script>
