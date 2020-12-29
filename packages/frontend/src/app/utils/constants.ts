@@ -10,6 +10,13 @@ import { TopbarSettings } from '../topbar'
 export const STORAGE_PREFIX = 'awooing_'
 
 /**
+ *
+ */
+export const STORAGE_NAMES = {
+  AUTH_BEARER_TOKEN: 'auth_bearerToken'
+}
+
+/**
  * Default Page Title
  *
  * This is the default page title on "/" (and default hero title)

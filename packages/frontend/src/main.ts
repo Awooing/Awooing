@@ -18,8 +18,10 @@ if (process.env.NODE_ENV === 'development') {
   console.log('Running Vue', app.version)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(window as any).$vue = app
+  const bindToWindow = (name: string, value: any) =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ((window as any)[name] = value)
 
-  // eslint-disable-next-line no-console
-  console.log('Bound Vue instance to window.$vue')
+  bindToWindow('$vue', app)
+  bindToWindow('$store', store)
 }

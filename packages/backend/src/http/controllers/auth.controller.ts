@@ -71,7 +71,7 @@ export const AuthController: F.FCtrl = async fastify => {
         joinDate: new Date(),
       })
 
-      return successRes({ message: 'success' }, res)
+      return successRes({ message: 'Registered' }, res)
     }
   )
 }

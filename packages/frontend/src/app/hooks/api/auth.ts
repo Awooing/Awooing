@@ -1,10 +1,14 @@
 import { hookFetch, req } from '@/app/axios'
 import UserDto from '@awooing/backend/src/dto/db/UserDto'
 import * as AS from '@awooing/backend/src/http/schemas/auth.schema'
-import { JwtPayload } from '@awooing/backend/src/http/helpers/jwt.helper'
+import {
+  JwtCreate,
+  JwtPayload
+} from '@awooing/backend/src/http/helpers/jwt.helper'
 import { API_ENDPOINTS } from '@/app/utils/constants'
 import { AxiosResponse } from 'axios'
 import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.helper'
+import { storeToken } from '../localStorage/auth'
 
 /**
  * POST /auth/login (AS.Login)
@@ -14,16 +18,18 @@ import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.help
  */
 
 export interface LoginSuccessData {
-  token: JwtPayload
+  token: JwtCreate
   user: UserDto
 }
 
-export const authenticate = async ({
-  username,
-  password
-}: AS.Login['Body']): Promise<
-  false | AxiosResponse<SuccessResponse<LoginSuccessData>>
-> => {
+export interface RegisterSuccessData {
+  message: 'Registered'
+}
+
+export const authenticate = async (
+  { username, password }: AS.Login['Body'],
+  saveToken: boolean
+): Promise<false | AxiosResponse<SuccessResponse<LoginSuccessData>>> => {
   try {
     const res = await req<LoginSuccessData>({
       method: 'POST',
@@ -34,14 +40,19 @@ export const authenticate = async ({
       }
     })
 
+    if (saveToken) storeToken(res.data.data.token, true)
+
     return res
   } catch (e) {
     return false
   }
 }
 
-export const hookLogin = (body: AS.Login['Body'], auto = false) =>
-  hookFetch(() => authenticate(body), auto)
+export const hookLogin = (
+  body: AS.Login['Body'],
+  saveToken = false,
+  auto = false
+) => hookFetch(() => authenticate(body, saveToken), auto)
 
 /**
  * PUT /auth/register (AS.Login)
@@ -55,10 +66,10 @@ export const register = async ({
   password,
   repeat
 }: AS.Register['Body']): Promise<
-  false | AxiosResponse<SuccessResponse<LoginSuccessData>>
+  false | AxiosResponse<SuccessResponse<RegisterSuccessData>>
 > => {
   try {
-    const res = await req<LoginSuccessData>({
+    const res = await req<RegisterSuccessData>({
       method: 'PUT',
       url: API_ENDPOINTS.put.register(),
       data: {

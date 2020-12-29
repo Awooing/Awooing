@@ -48,13 +48,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue"
-import Button from "@/components/elements/button/Button.vue"
-import Paragraph from "@/components/typography/Paragraph.vue"
-import Subtitle from "@/components/typography/Subtitle.vue"
+import { defineComponent, reactive, ref } from 'vue'
+import Button from '@/components/elements/button/Button.vue'
+import Paragraph from '@/components/typography/Paragraph.vue'
+import Subtitle from '@/components/typography/Subtitle.vue'
 
-import { hookLogin } from "@/app/hooks/api/auth"
-import { promisedBoolRefFalse } from "@/app/utils"
+import { hookLogin } from '@/app/hooks/api/auth'
+import { promisedBoolRefFalse } from '@/app/utils'
 
 export type StrOrNull = string | null
 
@@ -62,35 +62,35 @@ export default defineComponent({
   components: {
     Button,
     Subtitle,
-    Paragraph
+    Paragraph,
   },
   setup() {
     const form = reactive({
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       errors: {
         username: null as StrOrNull,
-        password: null as StrOrNull
-      }
+        password: null as StrOrNull,
+      },
     })
 
     const loading = ref(false)
-    const login = hookLogin(form)
+    const login = hookLogin(form, true)
 
     const validateUsername = () => {
-      form.username = form.username.replace(/\s/g, "")
+      form.username = form.username.replace(/\s/g, '')
       const is = form.username.length < 6
       form.errors.username = is
-        ? "Username must have at least 6 characters."
+        ? 'Username must have at least 6 characters.'
         : null
 
       return is
     }
 
     const validatePassword = () => {
-      const is = form.password.replace(/\s/g, "").length < 6
+      const is = form.password.replace(/\s/g, '').length < 6
       form.errors.password = is
-        ? "Password must have at least 6 characters."
+        ? 'Password must have at least 6 characters.'
         : null
 
       return is
@@ -114,8 +114,8 @@ export default defineComponent({
       submitForm,
       validateUsername,
       validatePassword,
-      validate
+      validate,
     }
-  }
+  },
 })
 </script>

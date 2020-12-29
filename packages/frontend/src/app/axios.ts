@@ -12,19 +12,24 @@ import {
   STAGING_API_ENDPOINT
 } from './utils/constants'
 import { frmt } from '@awooing/backend/src/console'
+import { retrieveToken } from './hooks/localStorage/auth'
 
 /**
  * Function that initializes the Axios library
  * and sets all the important settings.
  */
 export const createAxios = (): AxiosInstance => {
+  const jwt = retrieveToken()
   const axios = Axios.create({
     baseURL:
       process.env.NODE_ENV === 'production'
         ? window.location.hostname.includes('staging')
           ? STAGING_API_ENDPOINT
           : PROD_API_ENDPOINT
-        : DEV_API_ENDPOINT
+        : DEV_API_ENDPOINT,
+    headers: {
+      Authorization: jwt ? `Bearer ${jwt.token}` : undefined
+    }
   })
   return axios
 }

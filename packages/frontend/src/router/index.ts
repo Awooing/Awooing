@@ -1,6 +1,30 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { fetchMe } from '@/app/hooks/api/user'
+import {
+  createRouter,
+  createWebHistory,
+  NavigationGuardWithThis,
+  RouteRecordRaw
+} from 'vue-router'
+import store from '@/store/modules/user'
+import { UserActions } from '@/store/modules/user'
 
 export type VueImport = Promise<typeof import('*.vue')>
+
+const createAuthMiddleware = (
+  redirectIfFailed = false
+): NavigationGuardWithThis<unknown> => {
+  return async (_, __, next) => {
+    try {
+      const me = await fetchMe()
+      store.dispatch(UserActions.setAuthenticated, me ? true : false)
+      store.dispatch(UserActions.setUser, me ? me : null)
+      if (!me && redirectIfFailed) next('/')
+    } catch (_) {
+      //
+    }
+    next()
+  }
+}
 
 const routes: RouteRecordRaw[] = [
   {
@@ -32,7 +56,8 @@ const routes: RouteRecordRaw[] = [
         component: (): VueImport =>
           import(/* webpackChunkName: "user_view" */ '../pages/user/_id.vue')
       }
-    ]
+    ],
+    beforeEnter: createAuthMiddleware(false)
   }
 ]
 
