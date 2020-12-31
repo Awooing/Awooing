@@ -22,19 +22,19 @@
 </template>
 
 <script lang="ts">
-import { AWOOING_STOPS_IMAGE } from "@/app/utils/constants"
-import { defineComponent } from "vue"
+import { AWOOING_STOPS_IMAGE } from '@/app/utils/constants'
+import { defineComponent } from 'vue'
 export default defineComponent({
   props: {
     background: {
       type: String,
-      default: "gray-800"
-    }
+      default: 'gray-800',
+    },
   },
   setup() {
     return {
-      AWOOING_STOPS_IMAGE
+      AWOOING_STOPS_IMAGE,
     }
-  }
+  },
 })
 </script>

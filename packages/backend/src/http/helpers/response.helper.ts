@@ -23,6 +23,7 @@ export const BackendEndpoints = {
   put: {
     createArticle: (): string => '/article/create',
     register: (): string => '/auth/register',
+    councilCreate: (): string => '/council/create',
   },
 }
 export interface ErrorDescription {

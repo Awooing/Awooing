@@ -39,34 +39,34 @@
 </template>
 
 <script lang="ts">
-import { onMountedSetTitle } from "@/app/hooks/title"
-import { defineComponent } from "vue"
+import { onMountedSetTitle } from '@/app/hooks/title'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
     const user = {
-      username: "Mia",
-      description: "Mia nyaa.",
-      image: "https://via.placeholder.com/500",
-      group: "Awoo Council",
+      username: 'Mia',
+      description: 'Mia nyaa.',
+      image: 'https://via.placeholder.com/500',
+      group: 'Awoo Council',
       comments: [
         {
           from: {
-            id: "1",
-            slug: "user-1",
-            username: "Miaaa2"
+            id: '1',
+            slug: 'user-1',
+            username: 'Miaaa2',
           },
-          content: "Meow",
-          createdAt: new Date()
-        }
-      ]
+          content: 'Meow',
+          createdAt: new Date(),
+        },
+      ],
     }
 
     onMountedSetTitle(user.username)
 
     return {
-      user
+      user,
     }
-  }
+  },
 })
 </script>

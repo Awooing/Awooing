@@ -1,7 +1,7 @@
 import { User, UserRole } from '../../db/entity/User'
 
 export class UserDto {
-  constructor(entity: User) {
+  constructor(entity: User | UserDto) {
     this.username = entity.username
     this.sluggedUsername = entity.sluggedUsername
     this.showAs = entity.showAs
@@ -9,7 +9,7 @@ export class UserDto {
     this.joinDate = entity.joinDate
   }
 
-  public static fromUser(entity: User) {
+  public static fromUser(entity: User | UserDto) {
     return new this(entity)
   }
 

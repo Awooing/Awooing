@@ -11,22 +11,22 @@
 </template>
 
 <script lang="ts">
-import { AWOO_DISCORD } from "@/app/utils/constants"
-import { defineComponent } from "vue"
+import { AWOO_DISCORD } from '@/app/utils/constants'
+import { defineComponent } from 'vue'
 export default defineComponent({
   props: {
     id: {
       type: String,
-      default: AWOO_DISCORD.id
+      default: AWOO_DISCORD.id,
     },
     height: {
       type: String,
-      default: "500"
+      default: '500',
     },
     theme: {
       type: String,
-      default: "dark"
-    }
-  }
+      default: 'dark',
+    },
+  },
 })
 </script>

@@ -7,18 +7,32 @@ import {
 } from 'vue-router'
 import store from '@/store/modules/user'
 import { UserActions } from '@/store/modules/user'
+import { tokenExists } from '@/app/hooks/localStorage/auth'
+import { UserRole } from '@awooing/backend/src/db/entity/User'
 
 export type VueImport = Promise<typeof import('*.vue')>
 
 const createAuthMiddleware = (
-  redirectIfFailed = false
+  redirectIfFailed = false,
+  role?: UserRole
 ): NavigationGuardWithThis<unknown> => {
   return async (_, __, next) => {
+    let authenticated = tokenExists()
+
+    if (!authenticated) return redirectIfFailed ?? role ? next('/') : next()
+
     try {
       const me = await fetchMe()
-      store.dispatch(UserActions.setAuthenticated, me ? true : false)
-      store.dispatch(UserActions.setUser, me ? me : null)
-      if (!me && redirectIfFailed) next('/')
+      authenticated = me ? true : false
+
+      store.dispatch(UserActions.setAuthenticated, authenticated)
+      store.dispatch(UserActions.setUser, me ? me.data.data.user : null)
+
+      if (!authenticated && (redirectIfFailed ?? role)) return next('/')
+      if (role) {
+        if (!me) return next('/')
+        return me.data.data.user.role === role ? next() : next('/')
+      }
     } catch (_) {
       //
     }
@@ -52,9 +66,33 @@ const routes: RouteRecordRaw[] = [
           import(/* webpackChunkName: "awoo" */ '../pages/awoo.vue')
       },
       {
-        path: '/user/:id',
+        path: '/user/:slug',
         component: (): VueImport =>
-          import(/* webpackChunkName: "user_view" */ '../pages/user/_id.vue')
+          import(/* webpackChunkName: "user-view" */ '../pages/user/_slug.vue')
+      },
+      {
+        path: '/news/article/:slug',
+        component: (): VueImport =>
+          import(
+            /* webpackChunkName: "article-view" */ '../pages/article/_slug.vue'
+          ),
+        props: true
+      },
+      {
+        path: '/admin/article/create',
+        component: (): VueImport =>
+          import(
+            /* webpackChunkName: "admin_article-create" */ '../pages/admin/article/create.vue'
+          ),
+        beforeEnter: createAuthMiddleware(true, 'Admin')
+      },
+      {
+        path: '/admin/council/create',
+        component: (): VueImport =>
+          import(
+            /* webpackChunkName: "admin_council-create" */ '../pages/admin/council/create.vue'
+          ),
+        beforeEnter: createAuthMiddleware(true, 'Admin')
       }
     ],
     beforeEnter: createAuthMiddleware(false)

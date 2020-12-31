@@ -44,29 +44,29 @@
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue"
+import { computed, defineComponent, reactive } from 'vue'
 
-import Footer from "@/components/layout/Footer.vue"
-import Hero from "@/components/elements/hero/Hero.vue"
-import HeroTitle from "@/components/typography/HeroTitle.vue"
-import Navbar from "@/components/layout/navbar/Navbar.vue"
-import store from "@/store"
+import Footer from '@/components/layout/Footer.vue'
+import Hero from '@/components/elements/hero/Hero.vue'
+import HeroTitle from '@/components/typography/HeroTitle.vue'
+import Navbar from '@/components/layout/navbar/Navbar.vue'
+import store from '@/store'
 
 export default defineComponent({
   components: {
     Footer,
     Hero,
     HeroTitle,
-    Navbar
+    Navbar,
   },
   setup() {
     const state = reactive({
-      title: computed(() => store.state.title)
+      title: computed(() => store.state.title),
     })
 
     return {
-      state
+      state,
     }
-  }
+  },
 })
 </script>

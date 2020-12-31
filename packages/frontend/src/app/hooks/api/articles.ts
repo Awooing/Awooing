@@ -36,3 +36,61 @@ export const fetchArticles = async ({
 
 export const hookArticles = (params: AS.List['Querystring'], auto = true) =>
   hookFetch(() => fetchArticles(params), auto)
+
+/**
+ * PUT /article/create (AS.Create)
+ *
+ * @function createArticle(body)
+ * @function hookCreateArticle(body)
+ */
+
+export interface ArticleCreateData {
+  message: 'Created'
+}
+
+export const createArticle = async ({
+  title,
+  content
+}: AS.ArticleCreate['Body']): Promise<
+  false | AxiosResponse<SuccessResponse<ArticleCreateData>>
+> => {
+  try {
+    const res = await req<ArticleCreateData>({
+      method: 'PUT',
+      url: API_ENDPOINTS.put.createArticle(),
+      data: {
+        title,
+        content
+      }
+    })
+    return res
+  } catch (e) {
+    return false
+  }
+}
+
+export interface ArticleFetchData {
+  article: ArticleDto
+}
+
+export const hookCreateArticle = (
+  body: AS.ArticleCreate['Body'],
+  auto = false
+) => hookFetch(() => createArticle(body), auto)
+
+export const fetchArticleBySlug = async (
+  slug: string
+): Promise<false | AxiosResponse<SuccessResponse<ArticleFetchData>>> => {
+  try {
+    const res = await req<ArticleFetchData>({
+      method: 'GET',
+      url: API_ENDPOINTS.get.articleBySlug(slug)
+    })
+    return res
+  } catch (e) {
+    return false
+  }
+}
+
+export const hookArticleBySlug = (slug: string, auto = true) =>
+  hookFetch(() => fetchArticleBySlug(slug), auto)

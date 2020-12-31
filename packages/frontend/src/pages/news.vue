@@ -23,8 +23,10 @@
           :key="i"
           :infoFooter="true"
           :title="post.title"
-          :author="post.author.username"
-          :date="post.date"
+          :author="post.user.username"
+          :date="new Date(post.createdAt)"
+          :to="`/news/article/${post.slug}`"
+          class="mb-4"
         >
           {{ truncate(post.content) }}...
         </card>

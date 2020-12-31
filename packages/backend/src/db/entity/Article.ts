@@ -25,10 +25,10 @@ export class Article {
   @prop({ required: true })
   userId!: Types.ObjectId
 
-  @prop({ required: true })
+  @prop({ required: true, default: () => new Date() })
   createdAt?: Date
 
-  @prop({ required: true, unique: true })
+  @prop({ required: false, unique: true })
   slug?: string
 }
 

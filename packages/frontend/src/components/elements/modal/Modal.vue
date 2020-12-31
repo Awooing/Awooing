@@ -28,22 +28,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
-import ModalShadow from "@/components/elements/modal/ModalShadow.vue"
+import { defineComponent } from 'vue'
+import ModalShadow from '@/components/elements/modal/ModalShadow.vue'
 
 export default defineComponent({
   components: {
-    ModalShadow
+    ModalShadow,
   },
   props: {
     show: {
       type: Boolean,
-      default: false
+      default: false,
     },
     toggle: {
       type: Function,
-      default: () => false
-    }
-  }
+      default: () => false,
+    },
+  },
 })
 </script>

@@ -129,21 +129,13 @@ export default defineComponent({
 
     watch(() => size, updateAnimation)
 
+    watch(() => color, updateAnimation)
+
     return {
       spinnerStyle,
       spinnerPartStyle,
       rotatorStyle,
     }
-  },
-  watch: {
-    size: {
-      handler: 'updateAnimation',
-      immediate: true,
-    },
-    color: {
-      handler: 'updateAnimation',
-      immediate: true,
-    },
   },
 })
 </script>

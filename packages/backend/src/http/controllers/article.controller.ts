@@ -29,6 +29,7 @@ export const ArticleController: F.FCtrl = async server => {
   server.get<AS.List>('/list', { schema: AS.articleList }, async (req, res) => {
     const maxPerPage = req.query.perPage
     const articles = await Article.find()
+      .sort({ createdAt: 'desc' })
       .skip(maxPerPage * (req.query.currentPage - 1))
       .limit(maxPerPage)
     successRes(
@@ -114,6 +115,11 @@ export const ArticleController: F.FCtrl = async server => {
         title: req.body.title,
         content: req.body.content,
         userId: ctx.payload.userId,
+        slug: slugify(req.body.title, {
+          lower: true,
+          remove: /[*+~.()'"!:@]/g,
+        }),
+        createdAt: new Date(),
       })
 
       return successRes(

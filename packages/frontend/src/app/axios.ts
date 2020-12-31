@@ -3,13 +3,13 @@ import { reactive, UnwrapRef } from 'vue'
 import {
   SuccessResponse,
   ErrorDescription,
-  ErrorResponse
+  ErrorResponse,
 } from '@awooing/backend/src/http/helpers/response.helper'
 import { bar } from './topbar'
 import {
   DEV_API_ENDPOINT,
   PROD_API_ENDPOINT,
-  STAGING_API_ENDPOINT
+  STAGING_API_ENDPOINT,
 } from './utils/constants'
 import { frmt } from '@awooing/backend/src/console'
 import { retrieveToken } from './hooks/localStorage/auth'
@@ -28,8 +28,8 @@ export const createAxios = (): AxiosInstance => {
           : PROD_API_ENDPOINT
         : DEV_API_ENDPOINT,
     headers: {
-      Authorization: jwt ? `Bearer ${jwt.token}` : undefined
-    }
+      Authorization: jwt ? `Bearer ${jwt.token}` : undefined,
+    },
   })
   return axios
 }
@@ -120,7 +120,7 @@ export const reactiveFetch = <
 ) =>
   reactive<TData & { fetch: FetchableState }>({
     ...data,
-    fetch: defaultFetch
+    fetch: defaultFetch,
   })
 
 /**
@@ -144,7 +144,7 @@ export const hookFetch = <TData extends unknown>(
 } => {
   const data = reactiveFetch({
     data: null as TData | null,
-    request: (async () => null) as () => Promise<unknown>
+    request: (async () => null) as () => Promise<unknown>,
   })
 
   const fetchData = async (): Promise<void | false> => {

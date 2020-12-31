@@ -17,12 +17,10 @@
         </div>
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
-            <div class="flex">
-              <span class="mr-3">
-                <Button @click="toggleLogin">Login</Button>
-              </span>
-              <Button @click="toggleRegister">Register</Button>
-            </div>
+            <navbar-user
+              :toggleLogin="toggleLogin"
+              :toggleRegister="toggleRegister"
+            />
           </div>
         </div>
       </div>
@@ -36,12 +34,11 @@
         <navbar-item to="/awoo" :mobile="true">Random Awoo</navbar-item>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-700 flex justify-center">
-        <div class="flex">
-          <span class="mr-3">
-            <Button @click="toggleLogin">Login</Button>
-          </span>
-          <Button @click="toggleRegister">Register</Button>
-        </div>
+        <navbar-user
+          :toggleLogin="toggleLogin"
+          :toggleRegister="toggleRegister"
+          :mobile="true"
+        />
       </div>
     </div>
   </nav>
@@ -56,13 +53,26 @@
 </template>
 
 <script lang="ts">
-import Button from "@/components/elements/button/Button.vue"
-import { defineComponent, reactive } from "vue"
-import NavbarItem from "./NavbarItem.vue"
-import Modal from "@/components/elements/modal/Modal.vue"
+import { computed, defineComponent, reactive, ref } from 'vue'
 
-import LoginForm from "@/components/forms/LoginForm.vue"
-import RegisterForm from "@/components/forms/RegisterForm.vue"
+import NavbarItem from './NavbarItem.vue'
+import NavbarUser from './NavbarUser.vue'
+
+import Modal from '@/components/elements/modal/Modal.vue'
+import Button from '@/components/elements/button/Button.vue'
+
+import LoginForm from '@/components/forms/LoginForm.vue'
+import RegisterForm from '@/components/forms/RegisterForm.vue'
+
+import Dropdown from '@/components/elements/dropdown/Dropdown.vue'
+import DropdownItem from '@/components/elements/dropdown/DropdownItem.vue'
+
+import Cog from '@/components/icons/Cog.vue'
+import Logout from '@/components/icons/Logout.vue'
+
+import userStore, { UserState } from '@/store/modules/user'
+
+import { useStore } from 'vuex'
 
 export default defineComponent({
   components: {
@@ -70,13 +80,18 @@ export default defineComponent({
     NavbarItem,
     Button,
     LoginForm,
-    RegisterForm
+    RegisterForm,
+    Dropdown,
+    DropdownItem,
+    Cog,
+    Logout,
+    NavbarUser,
   },
   setup() {
     const state = reactive({
       menuOpen: false,
       showLogin: false,
-      showRegister: false
+      showRegister: false,
     })
 
     const toggleMenu = () => (state.menuOpen = !state.menuOpen)
@@ -87,8 +102,8 @@ export default defineComponent({
       toggleMenu,
       toggleLogin,
       toggleRegister,
-      state
+      state,
     }
-  }
+  },
 })
 </script>

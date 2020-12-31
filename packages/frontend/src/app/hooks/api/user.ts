@@ -14,7 +14,7 @@ export const fetchMe = async (): Promise<
   try {
     const res = await req<UserSuccessData>({
       method: 'GET',
-      url: API_ENDPOINTS.get.currentUser()
+      url: API_ENDPOINTS.get.currentUser(),
     })
 
     return res

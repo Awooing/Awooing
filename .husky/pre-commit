@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname $0)/_/husky.sh"
 
-yarn style:format && yarn style:lint
+prettier --write .
+eslint

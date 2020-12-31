@@ -14,52 +14,52 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue"
-import ButtonSpinner from "./ButtonSpinner.vue"
+import { defineComponent, reactive } from 'vue'
+import ButtonSpinner from './ButtonSpinner.vue'
 
 export default defineComponent({
   props: {
     to: {
       type: String,
-      default: null
+      default: null,
     },
     href: {
       type: String,
-      default: null
+      default: null,
     },
     color: {
       type: String,
-      default: "gray-700"
+      default: 'gray-700',
     },
     hoverColor: {
       type: String,
-      default: "gray-600"
+      default: 'gray-600',
     },
     px: {
       type: String,
-      default: "3"
+      default: '3',
     },
     py: {
       type: String,
-      default: "2"
+      default: '2',
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   components: {
-    ButtonSpinner
+    ButtonSpinner,
   },
   setup(props) {
     const state = reactive({
-      classes: `flex cursor-pointer bg-${props.color} rounded-md px-${props.px} py-${props.py} font-medium text-white hover:bg-${props.hoverColor} transition duration-100 ease-in-out`
+      classes: `flex cursor-pointer bg-${props.color} rounded-md px-${props.px} py-${props.py} font-medium text-white hover:bg-${props.hoverColor} transition duration-100 ease-in-out`,
     })
     return state
-  }
+  },
 })
 </script>

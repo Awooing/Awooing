@@ -21,3 +21,5 @@ export const promisedBoolRefFalse = <
   promise.then(() => (ref.value = false))
   return promise
 }
+
+export const admin = (...str: string[]) => ['[Admin]', ...str].join(' ')

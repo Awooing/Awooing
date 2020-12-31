@@ -5,23 +5,31 @@
       author
     }}</span>
     &ndash; Date:
-    <span class="text-gray-300 ml-1">{{ date.toLocaleDateString() }}</span>
+    <span class="text-gray-300 ml-1">{{
+      date.toLocaleDateString() +
+      ` ${pad(date.getHours())}:${pad(date.getMinutes())}`
+    }}</span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
     date: {
       type: Date,
-      default: new Date()
+      default: new Date(),
     },
     author: {
       type: String,
-      default: "Unknown"
+      default: 'Unknown',
+    },
+  },
+  setup() {
+    return {
+      pad: (num: number) => (String(num).length === 1 ? `0${num}` : num),
     }
-  }
+  },
 })
 </script>

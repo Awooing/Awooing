@@ -1,5 +1,5 @@
 import { createStore, ActionTree, GetterTree, MutationTree } from 'vuex'
-import vuexUser from './modules/user'
+import user from './modules/user'
 
 /**
  * Default RootState
@@ -62,7 +62,7 @@ const RootStore = createStore({
   mutations,
   actions,
   modules: {
-    user: vuexUser
+    user
   },
   getters
 })

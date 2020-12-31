@@ -19,22 +19,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
     to: {
       type: String,
-      default: null
+      default: null,
     },
     href: {
       type: String,
-      default: "#"
+      default: '#',
     },
     mobile: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 })
 </script>

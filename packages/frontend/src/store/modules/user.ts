@@ -6,7 +6,7 @@ import { createStore, ActionTree, GetterTree, MutationTree } from 'vuex'
  */
 export const state = () => ({
   authenticated: false,
-  user: null as UserDto | null
+  user: null as UserDto | null,
 })
 
 /**
@@ -17,7 +17,7 @@ export type UserState = ReturnType<typeof state>
 
 export enum UserActions {
   setAuthenticated = 'app_auth_setAuthenticated',
-  setUser = 'app_auth_setUser'
+  setUser = 'app_auth_setUser',
 }
 
 /**
@@ -31,7 +31,7 @@ const mutations: MutationTree<UserState> = {
     state.authenticated = value
   },
   [UserActions.setUser]: (state, value: UserState['user']) =>
-    (state.user = value)
+    (state.user = value),
 }
 
 /**
@@ -43,7 +43,7 @@ const actions: ActionTree<UserState, UserState> = {
     value: UserState['authenticated']
   ) => commit(UserActions.setAuthenticated, value),
   [UserActions.setUser]: ({ commit }, value: UserState['user']) =>
-    commit(UserActions.setUser, value)
+    commit(UserActions.setUser, value),
 }
 
 /**
@@ -51,7 +51,7 @@ const actions: ActionTree<UserState, UserState> = {
  */
 const getters: GetterTree<UserState, UserState> = {
   getUser: state => () => state.user,
-  isAuthenticated: state => () => state.authenticated
+  isAuthenticated: state => () => state.authenticated,
 }
 /**
  * Vuex UserStore
@@ -60,7 +60,7 @@ const UserStore = createStore({
   state,
   mutations,
   actions,
-  getters
+  getters,
 })
 
 export default UserStore

@@ -21,7 +21,7 @@ export const fetchRandomImage = async (): Promise<
   try {
     const res = await req<AwooData>({
       method: 'GET',
-      url: API_ENDPOINTS.get.randomAwoo()
+      url: API_ENDPOINTS.get.randomAwoo(),
     })
 
     return res

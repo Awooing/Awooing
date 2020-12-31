@@ -19,38 +19,38 @@
 </template>
 
 <script lang="ts">
-import Paragraph from "@/components/typography/Paragraph.vue"
-import Subtitle from "@/components/typography/Subtitle.vue"
-import { defineComponent } from "vue"
-import CardTextFooter from "./CardTextFooter.vue"
+import Paragraph from '@/components/typography/Paragraph.vue'
+import Subtitle from '@/components/typography/Subtitle.vue'
+import { defineComponent } from 'vue'
+import CardTextFooter from './CardTextFooter.vue'
 
 export default defineComponent({
   components: { Paragraph, CardTextFooter, Subtitle },
   props: {
     image: {
       type: Boolean,
-      default: null
+      default: null,
     },
     title: {
       type: String,
-      default: "Untitled"
+      default: 'Untitled',
     },
     to: {
       type: String,
-      default: "#"
+      default: '#',
     },
     infoFooter: {
       type: Boolean,
-      default: false
+      default: false,
     },
     author: {
       type: String,
-      default: "Unknown"
+      default: 'Unknown',
     },
     date: {
-      type: String,
-      default: new Date()
-    }
-  }
+      type: Date,
+      default: new Date(),
+    },
+  },
 })
 </script>

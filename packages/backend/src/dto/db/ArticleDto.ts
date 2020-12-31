@@ -10,7 +10,7 @@ export class ArticleDto {
     this.createdAt = entity.createdAt
     this.slug = entity.slug
 
-    if (user) this.user = user instanceof User ? UserDto.fromUser(user) : user
+    if (user) this.user = UserDto.fromUser(user)
   }
 
   static async fromArticle(entity: Article, fetchUser = false) {

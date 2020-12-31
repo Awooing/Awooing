@@ -1,5 +1,7 @@
 import { STORAGE_NAMES } from '@/app/utils/constants'
+import { UserActions } from '@/store/modules/user'
 import { JwtCreate } from '@awooing/backend/src/http/helpers/jwt.helper'
+import { useStore } from 'vuex'
 import {
   exists as storageExists,
   remove as storageDelete,
@@ -34,13 +36,11 @@ export const retrieveToken = () => {
 /**
  * Remove the token
  *
- * @param {boolean} logout Logout the user (remove any User state from Vuex)?
+ * @param {boolean} logout Logout the user?
  */
 export const removeToken = (logout: boolean) => {
   storageDelete(AUTH_BEARER_TOKEN)
-  if (logout) {
-    // TODO: logout
-  }
+  if (logout) window.history.go()
 }
 
 /**

@@ -1,10 +1,7 @@
 import { hookFetch, req } from '@/app/axios'
 import UserDto from '@awooing/backend/src/dto/db/UserDto'
 import * as AS from '@awooing/backend/src/http/schemas/auth.schema'
-import {
-  JwtCreate,
-  JwtPayload
-} from '@awooing/backend/src/http/helpers/jwt.helper'
+import { JwtCreate } from '@awooing/backend/src/http/helpers/jwt.helper'
 import { API_ENDPOINTS } from '@/app/utils/constants'
 import { AxiosResponse } from 'axios'
 import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.helper'

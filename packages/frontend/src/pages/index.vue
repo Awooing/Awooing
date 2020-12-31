@@ -29,8 +29,9 @@
                   v-if="post"
                   :infoFooter="true"
                   :title="post.title"
-                  :author="post.author.username"
-                  :date="post.date"
+                  :author="post.user.username"
+                  :date="new Date(post.createdAt)"
+                  :to="`/news/article/${post.slug}`"
                 >
                   {{ truncate(post.content) }}...
                 </card>
@@ -44,9 +45,14 @@
       </div>
 
       <div
-        class="column justify-center md:justify-end"
-        style="display: flex !important"
+        class="column justify-center md:justify-end mt-0"
+        style="display: flex !important; flex-flow: column"
       >
+        <permissible role="Admin">
+          <div class="flex mb-4 justify-end">
+            <Button to="/admin/article/create">Create Article</Button>
+          </div>
+        </permissible>
         <discord-widget />
       </div>
     </div>
@@ -64,6 +70,7 @@ import Paragraph from '@/components/typography/Paragraph.vue'
 import Fetchable from '@/components/global/Fetchable.vue'
 import { onMountedSetTitle } from '@/app/hooks/title'
 import { hookArticles } from '@/app/hooks/api/articles'
+import Permissible from '@/components/global/Permissible.vue'
 
 export default defineComponent({
   name: 'Index',
@@ -75,6 +82,7 @@ export default defineComponent({
     Paragraph,
     AwooingStopsCard,
     Fetchable,
+    Permissible,
   },
   setup() {
     onMountedSetTitle('The Awooing Place')
