@@ -20,7 +20,6 @@
   </fetchable>
 </template>
 
-
 <script lang="ts">
 import { hookArticleBySlug } from '@/app/hooks/api/articles'
 import { onMountedSetTitle, setPageTitle } from '@/app/hooks/title'

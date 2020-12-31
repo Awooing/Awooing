@@ -7,10 +7,7 @@ import VueClickAway from 'vue3-click-away'
 
 const app = createApp(App)
 
-app
-  .use(store)
-  .use(router)
-  .use(VueClickAway)
+app.use(store).use(router).use(VueClickAway)
 
 app.mount('#app')
 

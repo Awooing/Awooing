@@ -22,7 +22,7 @@ export const fetchCouncil = async (): Promise<
   try {
     const res = await req<CouncilData>({
       method: 'GET',
-      url: API_ENDPOINTS.get.council()
+      url: API_ENDPOINTS.get.council(),
     })
 
     return res
@@ -47,7 +47,7 @@ export interface CouncilCreatedData {
 export const createMember = async ({
   name,
   description,
-  role
+  role,
 }: CS.Create['Body']): Promise<
   false | AxiosResponse<SuccessResponse<CouncilCreatedData>>
 > => {
@@ -58,8 +58,8 @@ export const createMember = async ({
       data: {
         name,
         description,
-        role
-      }
+        role,
+      },
     })
 
     return res

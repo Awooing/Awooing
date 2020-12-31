@@ -6,7 +6,7 @@ import {
   exists as storageExists,
   remove as storageDelete,
   retrieve as storageRetrieve,
-  set as store
+  set as store,
 } from '.'
 
 const { AUTH_BEARER_TOKEN } = STORAGE_NAMES

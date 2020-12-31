@@ -33,8 +33,8 @@ export const authenticate = async (
       url: API_ENDPOINTS.post.login(),
       data: {
         username,
-        password
-      }
+        password,
+      },
     })
 
     if (saveToken) storeToken(res.data.data.token, true)
@@ -61,7 +61,7 @@ export const hookLogin = (
 export const register = async ({
   username,
   password,
-  repeat
+  repeat,
 }: AS.Register['Body']): Promise<
   false | AxiosResponse<SuccessResponse<RegisterSuccessData>>
 > => {
@@ -72,8 +72,8 @@ export const register = async ({
       data: {
         username,
         password,
-        repeat
-      }
+        repeat,
+      },
     })
 
     return res

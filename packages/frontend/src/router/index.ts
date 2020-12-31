@@ -3,7 +3,7 @@ import {
   createRouter,
   createWebHistory,
   NavigationGuardWithThis,
-  RouteRecordRaw
+  RouteRecordRaw,
 } from 'vue-router'
 import store from '@/store/modules/user'
 import { UserActions } from '@/store/modules/user'
@@ -48,27 +48,27 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/',
         component: (): VueImport =>
-          import(/* webpackChunkName: "index" */ '../pages/index.vue')
+          import(/* webpackChunkName: "index" */ '../pages/index.vue'),
       },
       {
         path: '/news',
         component: (): VueImport =>
-          import(/* webpackChunkName: "news" */ '../pages/news.vue')
+          import(/* webpackChunkName: "news" */ '../pages/news.vue'),
       },
       {
         path: '/council',
         component: (): VueImport =>
-          import(/* webpackChunkName: "council" */ '../pages/council.vue')
+          import(/* webpackChunkName: "council" */ '../pages/council.vue'),
       },
       {
         path: '/awoo',
         component: (): VueImport =>
-          import(/* webpackChunkName: "awoo" */ '../pages/awoo.vue')
+          import(/* webpackChunkName: "awoo" */ '../pages/awoo.vue'),
       },
       {
         path: '/user/:slug',
         component: (): VueImport =>
-          import(/* webpackChunkName: "user-view" */ '../pages/user/_slug.vue')
+          import(/* webpackChunkName: "user-view" */ '../pages/user/_slug.vue'),
       },
       {
         path: '/news/article/:slug',
@@ -76,7 +76,7 @@ const routes: RouteRecordRaw[] = [
           import(
             /* webpackChunkName: "article-view" */ '../pages/article/_slug.vue'
           ),
-        props: true
+        props: true,
       },
       {
         path: '/admin/article/create',
@@ -84,7 +84,7 @@ const routes: RouteRecordRaw[] = [
           import(
             /* webpackChunkName: "admin_article-create" */ '../pages/admin/article/create.vue'
           ),
-        beforeEnter: createAuthMiddleware(true, 'Admin')
+        beforeEnter: createAuthMiddleware(true, 'Admin'),
       },
       {
         path: '/admin/council/create',
@@ -92,16 +92,16 @@ const routes: RouteRecordRaw[] = [
           import(
             /* webpackChunkName: "admin_council-create" */ '../pages/admin/council/create.vue'
           ),
-        beforeEnter: createAuthMiddleware(true, 'Admin')
-      }
+        beforeEnter: createAuthMiddleware(true, 'Admin'),
+      },
     ],
-    beforeEnter: createAuthMiddleware(false)
-  }
+    beforeEnter: createAuthMiddleware(false),
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
 
 export default router

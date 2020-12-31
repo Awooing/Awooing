@@ -19,14 +19,14 @@ export interface ArticleListData {
 
 export const fetchArticles = async ({
   perPage = 2,
-  currentPage = 1
+  currentPage = 1,
 }: AS.List['Querystring']): Promise<
   false | AxiosResponse<SuccessResponse<ArticleListData>>
 > => {
   try {
     const res = await req<ArticleListData>({
       method: 'GET',
-      url: API_ENDPOINTS.get.articleList(perPage, currentPage)
+      url: API_ENDPOINTS.get.articleList(perPage, currentPage),
     })
     return res
   } catch (e) {
@@ -50,7 +50,7 @@ export interface ArticleCreateData {
 
 export const createArticle = async ({
   title,
-  content
+  content,
 }: AS.ArticleCreate['Body']): Promise<
   false | AxiosResponse<SuccessResponse<ArticleCreateData>>
 > => {
@@ -60,8 +60,8 @@ export const createArticle = async ({
       url: API_ENDPOINTS.put.createArticle(),
       data: {
         title,
-        content
-      }
+        content,
+      },
     })
     return res
   } catch (e) {
@@ -84,7 +84,7 @@ export const fetchArticleBySlug = async (
   try {
     const res = await req<ArticleFetchData>({
       method: 'GET',
-      url: API_ENDPOINTS.get.articleBySlug(slug)
+      url: API_ENDPOINTS.get.articleBySlug(slug),
     })
     return res
   } catch (e) {

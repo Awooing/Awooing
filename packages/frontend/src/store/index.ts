@@ -5,7 +5,7 @@ import user from './modules/user'
  * Default RootState
  */
 export const state = () => ({
-  title: 'default'
+  title: 'default',
 })
 
 /**
@@ -16,7 +16,7 @@ export type RootState = ReturnType<typeof state>
 
 export enum RootActions {
   setTitle = 'app_setTitle',
-  setCurrentTitle = 'app_setCurrentTitle'
+  setCurrentTitle = 'app_setCurrentTitle',
 }
 
 const defaultTitle = 'The Awooing Place'
@@ -34,7 +34,7 @@ const mutations: MutationTree<RootState> = {
     (document.title =
       state.title === defaultTitle
         ? 'Awooing.moe'
-        : `${state.title} | Awooing.moe`)
+        : `${state.title} | Awooing.moe`),
 }
 
 /**
@@ -44,14 +44,14 @@ const actions: ActionTree<RootState, RootState> = {
   [RootActions.setTitle]: ({ commit }, value) =>
     commit(RootActions.setTitle, value),
   [RootActions.setCurrentTitle]: ({ commit }) =>
-    commit(RootActions.setCurrentTitle)
+    commit(RootActions.setCurrentTitle),
 }
 
 /**
  * Getters
  */
 const getters: GetterTree<RootState, RootState> = {
-  getTitle: state => state.title
+  getTitle: state => state.title,
 }
 
 /**
@@ -62,9 +62,9 @@ const RootStore = createStore({
   mutations,
   actions,
   modules: {
-    user
+    user,
   },
-  getters
+  getters,
 })
 
 export default RootStore
