@@ -5,7 +5,7 @@ import { dc, frmt } from '../console'
 
 export class DiscordFetcher {
   url = (discordId: string, avatarId: string) =>
-    `https://cdn.discord.com/avatars/${discordId}/${avatarId}`
+    `https://cdn.discordapp.com/avatars/${discordId}/${avatarId}`
 
   userById = async (discordId: string) => {
     try {

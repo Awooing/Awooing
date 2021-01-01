@@ -145,22 +145,26 @@ export const hookFetch = <TData extends unknown>(
   const data = reactiveFetch({
     data: null as TData | null,
     request: (async () => null) as () => Promise<unknown>,
+    err: null as BackendFetchError | null,
   })
 
   const fetchData = async (): Promise<void | false> => {
     data.data = null
-    const res = await bar.promised(fetchFn())
+    try {
+      const res = await bar.promised(fetchFn())
 
-    if (process.env.NODE_ENV === 'development')
-      // eslint-disable-next-line no-console
-      console.log(frmt('Response: '), res)
+      if (process.env.NODE_ENV === 'development')
+        // eslint-disable-next-line no-console
+        console.log(frmt('Response: '), res)
 
-    if (!res) return (data.fetch = false)
+      if (!res) return (data.fetch = false)
 
-    data.fetch = true
-    // TODO: remove as any
-    // eslint-disable-next-line
-    data.data = res.data.data as any
+      data.fetch = true
+      data.data = res.data.data as any
+    } catch (error) {
+      data.fetch = false
+      data.err = error
+    }
   }
 
   data.request = fetchData

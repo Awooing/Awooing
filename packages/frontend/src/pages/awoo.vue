@@ -16,7 +16,7 @@
             @click.shift="copyImageLink"
             :src="makeCdnUrl(awoo.data.awoo.path)"
             alt="This image link seems to be dead. Click again to load another image."
-            class="cursor-pointer"
+            class="cursor-pointer max-h-96"
           />
         </div>
       </fetchable>

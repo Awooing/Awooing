@@ -1,8 +1,15 @@
 <template>
   <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+    <div class="mb-3" v-if="reg.err">
+      <fetch-error-handler :error="reg.err" />
+    </div>
     <subtitle>Register</subtitle>
     <paragraph>Let’s create a new account!</paragraph>
-    <form class="mt-4 w-full" @submit.prevent="submitForm">
+    <form
+      class="mt-4 w-full"
+      @submit.prevent="submitForm"
+      v-if="!form.registered"
+    >
       <div class="mt-2">
         <input
           v-model="form.username"
@@ -58,6 +65,9 @@
         </Button>
       </div>
     </form>
+    <div v-else class="text-gray-400 text-sm mt-6 mb-2">
+      You have been registered successfully! Click away to close this modal.
+    </div>
   </div>
 </template>
 
@@ -69,12 +79,14 @@ import Subtitle from '@/components/typography/Subtitle.vue'
 
 import { hookRegister } from '@/app/hooks/api/auth'
 import { promisedBoolRefFalse } from '@/app/utils'
+import FetchErrorHandler from '../global/FetchErrorHandler.vue'
 
 export default defineComponent({
   components: {
     Button,
     Subtitle,
     Paragraph,
+    FetchErrorHandler,
   },
   setup() {
     const form = reactive({
@@ -86,6 +98,7 @@ export default defineComponent({
         password: null as string | null,
         repeat: null as string | null,
       },
+      registered: false,
     })
 
     const loading = ref(false)
@@ -126,6 +139,7 @@ export default defineComponent({
     const submitForm = async () => {
       try {
         await promisedBoolRefFalse(reg.request(), loading)
+        form.registered = true
       } catch (error) {
         console.log(error)
       }

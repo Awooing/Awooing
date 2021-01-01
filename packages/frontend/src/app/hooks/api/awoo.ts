@@ -1,4 +1,4 @@
-import { hookFetch, req } from '@/app/axios'
+import { BackendFetchError, hookFetch, req } from '@/app/axios'
 import { API_ENDPOINTS } from '@/app/utils/constants'
 import { CdnFile } from '@awooing/backend/src/fetchers/cdn.fetcher'
 import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.helper'
@@ -26,6 +26,7 @@ export const fetchRandomImage = async (): Promise<
 
     return res
   } catch (e) {
+    if (e instanceof BackendFetchError) throw e
     return false
   }
 }

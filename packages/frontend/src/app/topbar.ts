@@ -70,6 +70,7 @@ export class Topbar {
   ): TPromise {
     this.show()
     promise.then(this.hide)
+    promise.catch(this.hide)
     return promise
   }
 }

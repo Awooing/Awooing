@@ -8,10 +8,10 @@ import * as CS from '../schemas/council.schema'
 export const routePrefix = '/council'
 
 export const CouncilController: F.FCtrl = async fastify => {
-  fastify.get('/', async (req, res) => {
+  fastify.get('/', async (_, res) => {
     const members = await CouncilMember.find()
     return successRes(
-      { members: await CouncilMemberDto.fromMembers(members) },
+      { members: await CouncilMemberDto.fromMembers(members, true) },
       res
     )
   })

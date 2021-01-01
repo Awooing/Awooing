@@ -10,8 +10,6 @@ import { UserActions } from '@/store/modules/user'
 import { tokenExists } from '@/app/hooks/localStorage/auth'
 import { UserRole } from '@awooing/backend/src/db/entity/User'
 
-export type VueImport = Promise<typeof import('*.vue')>
-
 const createAuthMiddleware = (
   redirectIfFailed = false,
   role?: UserRole
@@ -43,36 +41,36 @@ const createAuthMiddleware = (
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: (): VueImport => import('../layouts/default.vue'),
+    component: () => import('../layouts/default.vue'),
     children: [
       {
         path: '/',
-        component: (): VueImport =>
+        component: () =>
           import(/* webpackChunkName: "index" */ '../pages/index.vue'),
       },
       {
         path: '/news',
-        component: (): VueImport =>
+        component: () =>
           import(/* webpackChunkName: "news" */ '../pages/news.vue'),
       },
       {
         path: '/council',
-        component: (): VueImport =>
+        component: () =>
           import(/* webpackChunkName: "council" */ '../pages/council.vue'),
       },
       {
         path: '/awoo',
-        component: (): VueImport =>
+        component: () =>
           import(/* webpackChunkName: "awoo" */ '../pages/awoo.vue'),
       },
       {
         path: '/user/:slug',
-        component: (): VueImport =>
+        component: () =>
           import(/* webpackChunkName: "user-view" */ '../pages/user/_slug.vue'),
       },
       {
         path: '/news/article/:slug',
-        component: (): VueImport =>
+        component: () =>
           import(
             /* webpackChunkName: "article-view" */ '../pages/article/_slug.vue'
           ),
@@ -80,7 +78,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: '/admin/article/create',
-        component: (): VueImport =>
+        component: () =>
           import(
             /* webpackChunkName: "admin_article-create" */ '../pages/admin/article/create.vue'
           ),
@@ -88,7 +86,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: '/admin/council/create',
-        component: (): VueImport =>
+        component: () =>
           import(
             /* webpackChunkName: "admin_council-create" */ '../pages/admin/council/create.vue'
           ),

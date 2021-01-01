@@ -1,4 +1,4 @@
-import { hookFetch, req } from '@/app/axios'
+import { BackendFetchError, hookFetch, req } from '@/app/axios'
 import UserDto from '@awooing/backend/src/dto/db/UserDto'
 import * as AS from '@awooing/backend/src/http/schemas/auth.schema'
 import { JwtCreate } from '@awooing/backend/src/http/helpers/jwt.helper'
@@ -41,6 +41,7 @@ export const authenticate = async (
 
     return res
   } catch (e) {
+    if (e instanceof BackendFetchError) throw e
     return false
   }
 }
@@ -78,6 +79,7 @@ export const register = async ({
 
     return res
   } catch (e) {
+    if (e instanceof BackendFetchError) throw e
     return false
   }
 }

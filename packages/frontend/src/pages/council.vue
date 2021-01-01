@@ -29,8 +29,9 @@
           v-for="(member, i) in council.data.members"
           :key="i"
           :name="member.name"
-          :image="member.image"
+          :image="member.avatar"
           :position="member.position"
+          class="mb-4"
         >
           {{ member.about }}
         </card>

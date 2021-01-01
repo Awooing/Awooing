@@ -2,12 +2,8 @@
   <div
     class="block rounded-md border border-gray-600 p-4 transition duration-200 ease-in-out cursor-pointer hover:bg-gray-900 hover:border-gray-900"
   >
-    <div class="flex flex-grow m-1 items-center">
-      <div v-if="image" class="mr-4">
-        <img :src="image" class="w-20 h-20 rounded-md" alt="name" />
-      </div>
-
-      <div>
+    <div class="columns m-1 items-center">
+      <div class="column">
         <subtitle>
           {{ name }} <span class="text-gray-400 text-sm">{{ position }}</span>
         </subtitle>
@@ -18,6 +14,14 @@
             <Button :to="`/user/${profile}`">Profile</Button>
           </div> -->
         </paragraph>
+      </div>
+
+      <div
+        v-if="image"
+        class="mr-4 column is-one-fifth justify-end items-center"
+        style="display: flex !important"
+      >
+        <img :src="image" class="w-28 h-28 rounded-md" :alt="name" />
       </div>
     </div>
   </div>

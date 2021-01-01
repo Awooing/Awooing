@@ -3,6 +3,9 @@
     class="mt-3 text-center sm:mt-0 sm:text-left w-full"
     @submit.prevent="submitForm"
   >
+    <div class="mb-3" v-if="login.err">
+      <fetch-error-handler :error="login.err" />
+    </div>
     <subtitle>Login</subtitle>
     <paragraph>Awooing with an account is always better :3</paragraph>
     <form class="mt-4 w-full">
@@ -55,6 +58,7 @@ import Subtitle from '@/components/typography/Subtitle.vue'
 
 import { hookLogin } from '@/app/hooks/api/auth'
 import { promisedBoolRefFalse } from '@/app/utils'
+import FetchErrorHandler from '../global/FetchErrorHandler.vue'
 
 export type StrOrNull = string | null
 
@@ -63,6 +67,7 @@ export default defineComponent({
     Button,
     Subtitle,
     Paragraph,
+    FetchErrorHandler,
   },
   setup() {
     const form = reactive({

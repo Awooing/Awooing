@@ -1,4 +1,4 @@
-import { hookFetch, req } from '@/app/axios'
+import { BackendFetchError, hookFetch, req } from '@/app/axios'
 import { API_ENDPOINTS } from '@/app/utils/constants'
 import UserDto from '@awooing/backend/src/dto/db/UserDto'
 import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.helper'
@@ -19,6 +19,7 @@ export const fetchMe = async (): Promise<
 
     return res
   } catch (e) {
+    if (e instanceof BackendFetchError) throw e
     return false
   }
 }

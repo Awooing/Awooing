@@ -1,4 +1,4 @@
-import { hookFetch, req } from '@/app/axios'
+import { BackendFetchError, hookFetch, req } from '@/app/axios'
 import { API_ENDPOINTS } from '@/app/utils/constants'
 import { CouncilMemberDto } from '@awooing/backend/src/dto/db/CouncilMemberDto'
 import { SuccessResponse } from '@awooing/backend/src/http/helpers/response.helper'
@@ -27,6 +27,7 @@ export const fetchCouncil = async (): Promise<
 
     return res
   } catch (e) {
+    if (e instanceof BackendFetchError) throw e
     return false
   }
 }
@@ -64,6 +65,7 @@ export const createMember = async ({
 
     return res
   } catch (e) {
+    if (e instanceof BackendFetchError) throw e
     return false
   }
 }
