@@ -21,7 +21,7 @@
           style="display: flex !important; flex-flow: column !important"
         >
           <div class="text-gray-400 dark:text-gray-100 text-xl">
-            2020 &copy;
+            2021 &copy;
             <a
               href="https://awooing.moe"
               target="_blank"
