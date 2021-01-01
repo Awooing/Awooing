@@ -13,7 +13,7 @@ export const STORAGE_PREFIX = 'awooing_'
  *
  */
 export const STORAGE_NAMES = {
-  AUTH_BEARER_TOKEN: 'auth_bearerToken',
+  AUTH_BEARER_TOKEN: 'auth_bearerToken'
 }
 
 /**
@@ -38,8 +38,8 @@ export const TOPBAR_SETTINGS: TopbarSettings = {
   barColors: {
     0: '#281483',
     0.3: '#8f6ed5',
-    1.0: '#d782d9',
-  },
+    1.0: '#d782d9'
+  }
 }
 
 /**
@@ -67,12 +67,12 @@ export const DEV_API_ENDPOINT = 'http://localhost:8000'
 /**
  * Staging API Endpoint
  */
-export const STAGING_API_ENDPOINT = 'http://staging-api.awooing.moe/v2'
+export const STAGING_API_ENDPOINT = 'https://staging-api.awooing.moe/v2'
 
 /**
  * Production API Endpoint
  */
-export const PROD_API_ENDPOINT = 'http://api.awooing.moe/v2'
+export const PROD_API_ENDPOINT = 'https://api.awooing.moe/v2'
 
 /**
  * Other
@@ -92,7 +92,7 @@ export const AWOOING_STOPS_IMAGE =
  * TODO: remove
  */
 export const AWOO_EMOTES = {
-  awooo: 'https://cdn.discordapp.com/emojis/322522663304036352.png',
+  awooo: 'https://cdn.discordapp.com/emojis/322522663304036352.png'
 }
 
 /**
@@ -100,5 +100,5 @@ export const AWOO_EMOTES = {
  */
 export const AWOO_DISCORD = {
   id: '206530953391243275',
-  invite: 'https://discord.gg/wolke',
+  invite: 'https://discord.gg/wolke'
 }
